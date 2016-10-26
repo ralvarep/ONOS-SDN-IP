@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~
+|CORD-SDN-IP Scenario|
+~~~~~~~~~~~~~~~~~~~~~~
+
+Name:        CORD-SDN-IP
+
+Description: Virtual scenario of SDN-IP service (CORD Project)
+
+Author:      Raúl Álvarez Pinilla
+-->
+
+<vnx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
+  <global>
+    <version>2.0</version>
+    <scenario_name>CORD-SDN-IP</scenario_name>
+    <automac/>
+    <vm_mgmt type="private" network="10.250.0.0" mask="24" offset="0">
+       <host_mapping />
+    </vm_mgmt>
+    <vm_defaults>
+        <console id="0" display="no"/>
+        <console id="1" display="yes"/>
+    </vm_defaults>
+  </global>
+
+  <!-- NET DEFINITION -->
+  <!-- virbr0 (192.168.122.0/24) -->
+  <net name="virbr0" mode="virtual_bridge" managed="no"/>
+  <!-- Net101 (10.101.0.0/24) (2001:db8:101::/64) -->
+  <net name="net101" mode="virtual_bridge"/>
+  <!-- Net102 (10.102.0.0/24) (2001:db8:102::/64) -->
+  <net name="net102" mode="virtual_bridge"/>
+  <!-- Net103 (10.103.0.0/24) (2001:db8:103::/64) -->
+  <net name="net103" mode="virtual_bridge"/>
+  <!-- Net100-XXX (10.100.0.0/24) (2001:db8:100::/64) -->
+  <net name="net100-101" mode="virtual_bridge"/>
+  <net name="net100-102" mode="virtual_bridge"/>
+  <net name="net100-103" mode="virtual_bridge"/>
+  <net name="net100-01" mode="virtual_bridge"/>
+  <net name="net100-02" mode="virtual_bridge"/>
+  <net name="net100-03" mode="virtual_bridge"/>
+  <net name="net100-12" mode="virtual_bridge"/>
+  <net name="net100-13" mode="virtual_bridge"/>
+  <net name="net100-23" mode="virtual_bridge"/>
+  <net name="net100-ctrl" mode="virtual_bridge"/>
+  <net name="net100-mgmt1" mode="virtual_bridge"/>
+  <net name="net100-mgmt2" mode="virtual_bridge"/>
+
+  <!-- ONOS -->
+  <vm name="ONOS" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-ctrl">
+      <ipv4>10.100.10.1/24</ipv4>
+      <ipv6>2001:db8:100:10::1/64</ipv6>
+    </if>
+    <if id="2" net="net100-mgmt1">
+      <ipv4>10.100.11.1/24</ipv4>
+      <ipv6>2001:db8:100:11::1/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
+
+    <!-- Configure ONOS -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ONOS.sh</exec>
+
+    <!-- Start ONOS -->
+    <exec seq="on_boot" type="verbatim">nohup /root/conf/start-ONOS.sh</exec>
+  </vm>
+
+  <!-- Quagga Server -->
+  <vm name="quagga" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-mgmt1">
+      <ipv4>10.100.11.2/24</ipv4>
+      <ipv6>2001:db8:100:11::2/64</ipv6>
+    </if>
+    <if id="2" net="net100-mgmt2"/>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/quagga/</filetree>
+
+    <!-- Start Quagga Service -->
+    <exec seq="on_boot" type="verbatim">
+        cp /root/conf/*.conf /usr/local/etc/
+        /root/conf/start-quagga.sh
+    </exec>
+  </vm>
+
+  <!-- CLIENT AS101 -->
+  <vm name="client-101" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net101">
+      <ipv4>10.101.0.2/24</ipv4>
+      <ipv6>2001:db8:101::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Configure gateway -->
+    <exec seq="on_boot" type="verbatim">
+        ip route replace default via 10.101.0.1
+        ip -6 route replace default via 2001:db8:101::1
+    </exec>
+  </vm>
+
+  <!-- CLIENT AS102 -->
+  <vm name="client-102" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net102">
+      <ipv4>10.102.0.2/24</ipv4>
+      <ipv6>2001:db8:102::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Configure gateway -->
+    <exec seq="on_boot" type="verbatim">
+        ip route replace default via 10.102.0.1
+        ip -6 route replace default via 2001:db8:102::1
+    </exec>
+  </vm>
+
+  <!-- CLIENT AS103 -->
+  <vm name="client-103" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net103">
+      <ipv4>10.103.0.2/24</ipv4>
+      <ipv6>2001:db8:103::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Configure gateway -->
+    <exec seq="on_boot" type="verbatim">
+        ip route replace default via 10.103.0.1
+        ip -6 route replace default via 2001:db8:103::1
+    </exec>
+  </vm>
+
+  <!-- ROUTER AS101 -->
+  <vm name="R-101" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net101">
+      <ipv4>10.101.0.1/24</ipv4>
+      <ipv6>2001:db8:101::1/64</ipv6>
+    </if>
+    <if id="2" net="net100-101">
+      <ipv4>10.100.101.2/24</ipv4>
+      <ipv6>2001:db8:100:101::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Enable IP forwarding in this node -->
+    <forwarding type="ip"/>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/R-101/</filetree>
+
+    <!-- Start Quagga Service -->
+    <exec seq="on_boot" type="verbatim">
+        cp /root/conf/*.conf /usr/local/etc/
+        /root/conf/start-quagga.sh
+    </exec>
+  </vm>
+
+  <!-- ROUTER AS102 -->
+  <vm name="R-102" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net102">
+      <ipv4>10.102.0.1/24</ipv4>
+      <ipv6>2001:db8:102::1/64</ipv6>
+    </if>
+    <if id="2" net="net100-102">
+      <ipv4>10.100.102.2/24</ipv4>  
+      <ipv6>2001:db8:100:102::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Enable IP forwarding in this node -->
+    <forwarding type="ip"/>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/R-102/</filetree>
+
+    <!-- Start Quagga Service -->
+    <exec seq="on_boot" type="verbatim">
+        cp /root/conf/*.conf /usr/local/etc/
+        /root/conf/start-quagga.sh
+    </exec>
+  </vm>
+
+  <!-- ROUTER AS103 -->
+  <vm name="R-103" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net103">
+      <ipv4>10.103.0.1/24</ipv4>
+      <ipv6>2001:db8:103::1/64</ipv6>
+    </if>
+    <if id="2" net="net100-103">
+      <ipv4>10.100.103.2/24</ipv4>  
+      <ipv6>2001:db8:100:103::2/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Enable IP forwarding in this node -->
+    <forwarding type="ip"/>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/R-103/</filetree>
+
+    <!-- Start Quagga Service -->
+    <exec seq="on_boot" type="verbatim">
+        cp /root/conf/*.conf /usr/local/etc/
+        /root/conf/start-quagga.sh
+    </exec>
+  </vm>
+
+  <!-- S0 in AS100 -->
+  <vm name="s0" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-01"/>
+    <if id="2" net="net100-02"/>
+    <if id="3" net="net100-03"/>
+    <if id="4" net="net100-mgmt2"/>
+    <if id="5" net="net100-ctrl">
+      <ipv4>10.100.10.10/24</ipv4>
+      <ipv6>2001:db8:100:10::10/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s0/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S1 in AS100 -->
+  <vm name="s1" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-101"/>  
+    <if id="2" net="net100-01"/>
+    <if id="3" net="net100-12"/>
+    <if id="4" net="net100-13"/>
+    <if id="5" net="net100-ctrl">
+      <ipv4>10.100.10.11/24</ipv4>
+      <ipv6>2001:db8:100:10::11/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s1/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S2 in AS100 -->
+  <vm name="s2" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-102"/>
+    <if id="2" net="net100-02"/>
+    <if id="3" net="net100-12"/>
+    <if id="4" net="net100-23"/>
+    <if id="5" net="net100-ctrl">
+      <ipv4>10.100.10.12/24</ipv4>
+      <ipv6>2001:db8:100:10::12/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s2/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+  <!-- S3 in AS100 -->
+  <vm name="s3" type="lxc" arch="x86_64">
+    <filesystem type="cow">filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <mem>2G</mem>
+    <if id="1" net="net100-103"/>
+    <if id="2" net="net100-03"/>
+    <if id="3" net="net100-13"/>
+    <if id="4" net="net100-23"/>
+    <if id="5" net="net100-ctrl">
+      <ipv4>10.100.10.13/24</ipv4>
+      <ipv6>2001:db8:100:10::13/64</ipv6>
+    </if>
+    <if id="9" net="virbr0">
+      <ipv4>dhcp</ipv4>
+    </if>
+
+    <!-- Copy configuration files -->
+    <filetree seq="on_boot" root="/root/conf/">conf/s3/</filetree>
+
+    <!-- Configure Open vSwitch -->
+    <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
+  </vm>
+
+</vnx>
