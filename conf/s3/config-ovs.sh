@@ -12,10 +12,8 @@ echo "Configuring Open vSwitch..."
 ovs-vsctl add-br s3
 ovs-vsctl add-port s3 eth1
 ovs-vsctl add-port s3 eth2
-
 ovs-vsctl add-port s3 eth3
 ovs-vsctl add-port s3 eth4
-
 ovs-vsctl set bridge s3 other-config:hwaddr=00:00:00:00:01:03
 ovs-vsctl set bridge s3 protocols=OpenFlow13
 ovs-vsctl set-controller s3 tcp:10.100.10.1:6633
