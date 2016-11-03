@@ -16,7 +16,7 @@ In this scenario you can test SDN-IP application handling the transit traffic (t
 
 ![Scenario2](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_2/img/scenario.png)
 
-In this scenario you can test SDN-IP application handling the use case from scenario 1 an also when:
+In this scenario you can test SDN-IP application handling the use case from scenario 1 and also when:
 * One host wants to talk to another host, both two hosts are in SDN network.
 * One host in SDN network wants to talk to another host outside SDN network.
 * One host outside SDN network wants to talk to another host in SDN network.
