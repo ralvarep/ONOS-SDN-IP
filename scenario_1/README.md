@@ -22,7 +22,7 @@ Index:
 
 ## Scenario
 
-![Scenario](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/img/scenario.png)
+![Scenario](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_1/img/scenario.png)
 
 
 ## Usage
@@ -46,6 +46,7 @@ $ filesystems/create-rootfs_ubuntu16.04
 This step takes about 20-30 min. It will download all the necessary packages of the demo scenario.
 
 **STEP 3: Create virtual scenario**
+Move to a specific scenario folder and execute:
 ~~~
 $ sudo vnx -f CORD-SDN-IP.xml -t
 ~~~
@@ -140,7 +141,7 @@ speaker1: port=of:0000000000000100/4, vlan=None, peers=[10.100.103.2, 10.100.102
 
 In addition, ONOS GUI is avaible from your host through [http://10.250.0.2:8181/onos/ui/login.html](http://10.250.0.2:8181/onos/ui/login.html). To login karaf:karaf.
 
-![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/img/ONOS-GUI.jpg)
+![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_1/img/ONOS-GUI.jpg)
 
 
 **STEP 5: Connectivity Test between clients**
