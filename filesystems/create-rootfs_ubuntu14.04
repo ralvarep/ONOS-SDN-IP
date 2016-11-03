@@ -105,6 +105,7 @@ cd openvswitch-2.5.1
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential graphviz autoconf automake debhelper dh-autoreconf libssl-dev libtool python-all python-qt4 python-twisted-conch python-zopeinterface dkms racoon module-assistant python-twisted-web uuid-runtime linux-headers-3.19.0-58-generic
 DEB_BUILD_OPTIONS='nocheck' fakeroot debian/rules binary
 dpkg -i ../openvswitch-datapath-dkms_* ../openvswitch-switch_* ../openvswitch-common_*
+update-rc.d -f openvswitch-switch remove
 
 EOF
 )
