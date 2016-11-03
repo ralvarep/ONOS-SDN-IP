@@ -46,6 +46,7 @@ $ filesystems/create-rootfs_ubuntu16.04
 This step takes about 20-30 min. It will download all the necessary packages of the demo scenario.
 
 **STEP 3: Create virtual scenario**
+
 Move to a specific scenario folder and execute:
 ~~~
 $ sudo vnx -f CORD-SDN-IP.xml -t
