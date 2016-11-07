@@ -285,7 +285,7 @@ Author:      Raúl Álvarez Pinilla
     </if>
 
     <!-- Copy configuration files -->
-    <filetree seq="on_boot" root="/root/conf/">conf/s1/</filetree>
+    <filetree seq="on_boot" root="/root/conf/">conf/s2/</filetree>
 
     <!-- Configure Open vSwitch -->
     <exec seq="on_boot" type="verbatim">/root/conf/config-ovs.sh</exec>
