@@ -1,15 +1,16 @@
-# CORD Project - SDN-IP
-This repository provides a virtual scenario to explore the SDN-IP service of the CORD Project.
+# ONOS / CORD Project → SDN-IP → Scenario 1
+
+This repository provides a virtual scenario to explore the SDN-IP service of the ONOS / CORD Project.
 
 Demo scenario has been created using [Virtual Networks over linuX (VNX)](http://www.dit.upm.es/~vnx/).
 
 Index:
-- [Requirements](https://github.com/ralvarep/CORD-SDN-IP#requirements)
-- [Scenario](https://github.com/ralvarep/CORD-SDN-IP#scenario)
-- [Usage](https://github.com/ralvarep/CORD-SDN-IP#usage)
-- [Notes](https://github.com/ralvarep/CORD-SDN-IP#notes)
-- [Author](https://github.com/ralvarep/CORD-SDN-IP#author)
-- [References](https://github.com/ralvarep/CORD-SDN-IP#references)
+- [Requirements](https://github.com/ralvarep/ONOS-SDN-IP#requirements)
+- [Scenario](https://github.com/ralvarep/ONOS-SDN-IP#scenario)
+- [Usage](https://github.com/ralvarep/ONOS-SDN-IP#usage)
+- [Notes](https://github.com/ralvarep/ONOS-SDN-IP#notes)
+- [Author](https://github.com/ralvarep/ONOS-SDN-IP#author)
+- [References](https://github.com/ralvarep/ONOS-SDN-IP#references)
 
 
 ## Requirements
@@ -22,14 +23,14 @@ Index:
 
 ## Scenario
 
-![Scenario](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_1/img/scenario.png)
+![Scenario](https://raw.githubusercontent.com/ralvarep/ONOS-SDN-IP/master/scenario_1/img/scenario.png)
 
 
 ## Usage
 
 **STEP 1: Clone this repository**
 ~~~
-$ git clone https://github.com/ralvarep/CORD-SDN-IP.git
+$ git clone https://github.com/ralvarep/ONOS-SDN-IP.git
 ~~~
 
 **STEP 2: Build filesystem**
@@ -49,7 +50,7 @@ This step takes about 20-30 min. It will download all the necessary packages of 
 
 Move to a specific scenario folder and execute:
 ~~~
-$ sudo vnx -f CORD-SDN-IP.xml -t
+$ sudo vnx -f ONOS-SDN-IP.xml -t
 ~~~
 When the scenario is created, you can login to consoles with root:xxxx.
 
@@ -142,7 +143,7 @@ speaker1: port=of:0000000000000100/4, vlan=None, peers=[10.100.103.2, 10.100.102
 
 In addition, ONOS GUI is avaible from your host through [http://10.250.0.2:8181/onos/ui/login.html](http://10.250.0.2:8181/onos/ui/login.html). To login karaf:karaf.
 
-![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_1/img/ONOS-GUI.jpg)
+![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/ONOS-SDN-IP/master/scenario_1/img/ONOS-GUI.jpg)
 
 
 **STEP 5: Connectivity Test between clients**
@@ -164,19 +165,19 @@ PING 10.103.0.2 (10.103.0.2) 56(84) bytes of data.
 
 * Launch terminal of some virtual machine
 ~~~
-$ sudo vnx -f CORD-SDN-IP.xml --console -M VM-NAME
+$ sudo vnx -f ONOS-SDN-IP.xml --console -M VM-NAME
 ~~~
 * Shutdown scenario
 ~~~
-$ sudo vnx -f CORD-SDN-IP.xml --shutdown
+$ sudo vnx -f ONOS-SDN-IP.xml --shutdown
 ~~~
 * Start scenario that has previously been shutdown
 ~~~
-$ sudo vnx -f CORD-SDN-IP.xml --start
+$ sudo vnx -f ONOS-SDN-IP.xml --start
 ~~~
 * Destroy scenario
 ~~~
-$ sudo vnx -f CORD-SDN-IP.xml -P
+$ sudo vnx -f ONOS-SDN-IP.xml -P
 ~~~
 
 

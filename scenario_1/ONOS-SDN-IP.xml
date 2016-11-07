@@ -2,12 +2,12 @@
 
 <!--
 ~~~~~~~~~~~~~~~~~~~~~~
-|CORD-SDN-IP Scenario|
+|ONOS-SDN-IP Scenario|
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Name:        CORD-SDN-IP
+Name:        ONOS-SDN-IP
 
-Description: Virtual scenario of SDN-IP service (CORD Project)
+Description: Virtual scenario of SDN-IP service (ONOS/CORD Project)
 
 Author:      Raúl Álvarez Pinilla
 -->
@@ -16,7 +16,7 @@ Author:      Raúl Álvarez Pinilla
   xsi:noNamespaceSchemaLocation="/usr/share/xml/vnx/vnx-2.00.xsd">
   <global>
     <version>2.0</version>
-    <scenario_name>CORD-SDN-IP</scenario_name>
+    <scenario_name>ONOS-SDN-IP</scenario_name>
     <automac/>
     <vm_mgmt type="private" network="10.250.0.0" mask="24" offset="0">
        <host_mapping />
@@ -52,7 +52,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- ONOS -->
   <vm name="ONOS" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-ctrl">
       <ipv4>10.100.10.1/24</ipv4>
@@ -78,7 +78,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- Quagga Server -->
   <vm name="quagga" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-mgmt1">
       <ipv4>10.100.11.2/24</ipv4>
@@ -101,7 +101,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- CLIENT AS101 -->
   <vm name="client-101" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net101">
       <ipv4>10.101.0.2/24</ipv4>
@@ -120,7 +120,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- CLIENT AS102 -->
   <vm name="client-102" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net102">
       <ipv4>10.102.0.2/24</ipv4>
@@ -139,7 +139,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- CLIENT AS103 -->
   <vm name="client-103" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net103">
       <ipv4>10.103.0.2/24</ipv4>
@@ -158,7 +158,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- ROUTER AS101 -->
   <vm name="R-101" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net101">
       <ipv4>10.101.0.1/24</ipv4>
@@ -192,7 +192,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- ROUTER AS102 -->
   <vm name="R-102" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net102">
       <ipv4>10.102.0.1/24</ipv4>
@@ -226,7 +226,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- ROUTER AS103 -->
   <vm name="R-103" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net103">
       <ipv4>10.103.0.1/24</ipv4>
@@ -260,7 +260,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- S0 in AS100 -->
   <vm name="s0" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-01"/>
     <if id="2" net="net100-02"/>
@@ -283,7 +283,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- S1 in AS100 -->
   <vm name="s1" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-101"/>  
     <if id="2" net="net100-01"/>
@@ -306,7 +306,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- S2 in AS100 -->
   <vm name="s2" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-102"/>
     <if id="2" net="net100-02"/>
@@ -329,7 +329,7 @@ Author:      Raúl Álvarez Pinilla
 
   <!-- S3 in AS100 -->
   <vm name="s3" type="lxc" arch="x86_64">
-    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-CORD-SDN-IP</filesystem>
+    <filesystem type="cow">../filesystems/rootfs_lxc_ubuntu64-ONOS-SDN-IP</filesystem>
     <mem>2G</mem>
     <if id="1" net="net100-103"/>
     <if id="2" net="net100-03"/>

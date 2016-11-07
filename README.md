@@ -1,26 +1,26 @@
-# CORD Project - SDN-IP
+# ONOS / CORD Project → SDN-IP
 
 This repository provides a set of virtual scenarios to explore the SDN-IP service of the ONOS / CORD Project.
 
 Demo scenarios has been created using [Virtual Networks over linuX (VNX)](http://www.dit.upm.es/~vnx/).
 
 Index:
-- [Scenario 1](https://github.com/ralvarep/CORD-SDN-IP#scenario-1-without-sdn-ip-reactive-routing)
-- [Scenario 2](https://github.com/ralvarep/CORD-SDN-IP#scenario-2-with-sdn-ip-reactive-routing)
-- [Author](https://github.com/ralvarep/CORD-SDN-IP#author)
-- [References](https://github.com/ralvarep/CORD-SDN-IP#references)
+- [Scenario 1](https://github.com/ralvarep/ONOS-SDN-IP#scenario-1-without-sdn-ip-reactive-routing)
+- [Scenario 2](https://github.com/ralvarep/ONOS-SDN-IP#scenario-2-with-sdn-ip-reactive-routing)
+- [Author](https://github.com/ralvarep/ONOS-SDN-IP#author)
+- [References](https://github.com/ralvarep/ONOS-SDN-IP#references)
 
 
 ## Scenario 1 (without SDN-IP Reactive Routing)
 
-![Scenario1](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_1/img/scenario.png)
+![Scenario1](https://raw.githubusercontent.com/ralvarep/ONOS-SDN-IP/master/scenario_1/img/scenario.png)
 
 In this scenario you can test SDN-IP application handling the transit traffic (traffic from one BGP peer outside local SDN network traverses local SDN network and goes to another BGP peer).
 
 
 ## Scenario 2 (with SDN-IP Reactive Routing)
 
-![Scenario2](https://raw.githubusercontent.com/ralvarep/CORD-SDN-IP/master/scenario_2/img/scenario.png)
+![Scenario2](https://raw.githubusercontent.com/ralvarep/ONOS-SDN-IP/master/scenario_2/img/scenario.png)
 
 In this scenario you can test SDN-IP application handling the use case from scenario 1 and also when:
 * One host wants to talk to another host, both two hosts are in SDN network.
