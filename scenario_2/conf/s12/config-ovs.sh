@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Starting Open vSwitch..."
+service openvswitch-switch start
+
 echo "Checking Open vSwitch status..."
 while true; do
       if [ -S /var/run/openvswitch/db.sock ]; then
