@@ -69,11 +69,17 @@ Author:      Raúl Álvarez Pinilla
     <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/ONOS/</filetree>
 
-    <!-- Configure ONOS -->
-    <exec seq="on_boot" type="verbatim">/root/conf/config-ONOS.sh</exec>
+    <!-- Configure and Start ONOS (IPv4) -->
+    <exec seq="start-ipv4" type="verbatim">
+        /root/conf/config-ONOS_ipv4.sh
+        nohup /root/conf/start-ONOS.sh
+    </exec>
 
-    <!-- Start ONOS -->
-    <exec seq="on_boot" type="verbatim">nohup /root/conf/start-ONOS.sh</exec>
+    <!-- Configure and Start ONOS (IPv6) -->
+    <exec seq="start-ipv6" type="verbatim">
+        /root/conf/config-ONOS_ipv6.sh
+        nohup /root/conf/start-ONOS.sh
+    </exec>
   </vm>
 
   <!-- Quagga Server -->
@@ -92,9 +98,17 @@ Author:      Raúl Álvarez Pinilla
     <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/quagga/</filetree>
 
-    <!-- Start Quagga Service -->
-    <exec seq="on_boot" type="verbatim">
-        cp /root/conf/*.conf /usr/local/etc/
+    <!-- Start Quagga Service (IPv4) -->
+    <exec seq="start-ipv4" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv4.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
+    </exec>
+
+    <!-- Start Quagga Service (IPv6) -->
+    <exec seq="start-ipv6" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv6.conf /usr/local/etc/bgpd.conf
         /root/conf/start-quagga.sh
     </exec>
   </vm>
@@ -178,15 +192,23 @@ Author:      Raúl Álvarez Pinilla
     <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/R-101/</filetree>
 
-    <!-- Start Quagga Service -->
-    <exec seq="on_boot" type="verbatim">
-        cp /root/conf/*.conf /usr/local/etc/
-        /root/conf/start-quagga.sh
-    </exec>
-
     <!-- Enable IPv6 forwarding -->
     <exec seq="on_boot" type="verbatim">
         sysctl -w net.ipv6.conf.all.forwarding=1
+    </exec>
+
+    <!-- Start Quagga Service (IPv4) -->
+    <exec seq="start-ipv4" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv4.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
+    </exec>
+
+    <!-- Start Quagga Service (IPv6) -->
+    <exec seq="start-ipv6" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv6.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
     </exec>
   </vm>
 
@@ -212,15 +234,23 @@ Author:      Raúl Álvarez Pinilla
     <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/R-102/</filetree>
 
-    <!-- Start Quagga Service -->
-    <exec seq="on_boot" type="verbatim">
-        cp /root/conf/*.conf /usr/local/etc/
-        /root/conf/start-quagga.sh
-    </exec>
-
     <!-- Enable IPv6 forwarding -->
     <exec seq="on_boot" type="verbatim">
         sysctl -w net.ipv6.conf.all.forwarding=1
+    </exec>
+
+    <!-- Start Quagga Service (IPv4) -->
+    <exec seq="start-ipv4" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv4.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
+    </exec>
+
+    <!-- Start Quagga Service (IPv6) -->
+    <exec seq="start-ipv6" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv6.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
     </exec>
   </vm>
 
@@ -246,15 +276,23 @@ Author:      Raúl Álvarez Pinilla
     <!-- Copy configuration files -->
     <filetree seq="on_boot" root="/root/conf/">conf/R-103/</filetree>
 
-    <!-- Start Quagga Service -->
-    <exec seq="on_boot" type="verbatim">
-        cp /root/conf/*.conf /usr/local/etc/
-        /root/conf/start-quagga.sh
-    </exec>
-
     <!-- Enable IPv6 forwarding -->
     <exec seq="on_boot" type="verbatim">
         sysctl -w net.ipv6.conf.all.forwarding=1
+    </exec>
+
+    <!-- Start Quagga Service (IPv4) -->
+    <exec seq="start-ipv4" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv4.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
+    </exec>
+
+    <!-- Start Quagga Service (IPv6) -->
+    <exec seq="start-ipv6" type="verbatim">
+        cp /root/conf/zebra.conf /usr/local/etc/
+        cp /root/conf/bgpd_ipv6.conf /usr/local/etc/bgpd.conf
+        /root/conf/start-quagga.sh
     </exec>
   </vm>
 

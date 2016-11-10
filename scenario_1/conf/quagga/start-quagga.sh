@@ -1,5 +1,8 @@
 #!/bin/bash
 
+pkill -f zebra
+pkill -f bgpd
+
 sleep 5
 
 ifconfig eth2 down

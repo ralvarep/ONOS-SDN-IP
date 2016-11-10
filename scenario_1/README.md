@@ -8,7 +8,6 @@ Index:
 - [Requirements](https://github.com/ralvarep/ONOS-SDN-IP#requirements)
 - [Scenario](https://github.com/ralvarep/ONOS-SDN-IP#scenario)
 - [Usage](https://github.com/ralvarep/ONOS-SDN-IP#usage)
-- [Notes](https://github.com/ralvarep/ONOS-SDN-IP#notes)
 - [Author](https://github.com/ralvarep/ONOS-SDN-IP#author)
 - [References](https://github.com/ralvarep/ONOS-SDN-IP#references)
 
@@ -54,7 +53,18 @@ $ sudo vnx -f ONOS-SDN-IP.xml -t
 ~~~
 When the scenario is created, you can login to consoles with root:xxxx.
 
-**STEP 4: Check ONOS (SDN Controller)**
+**STEP 4: Start virtual scenario services**
+
+The virtual scenarios can be started with different configurations.
+~~~
+$ sudo vnx -f ONOS-SDN-IP.xml -x CONF_TAG
+
+ CONF_TAG => start-ipv4  (IPv4 BGP peering session between external routers and the internal router)
+          => start-ipv6  (IPv6 BGP peering session between external routers and the internal router)
+~~~
+When the scenario is created, you can login to consoles with root:xxxx.
+
+**STEP 5: Check ONOS (SDN Controller)**
 
 Enter in the ONOS console and execute the following command to check if ONOS is running:
 ~~~
@@ -136,9 +146,16 @@ BGP neighbor is 10.0.0.100, remote AS 100, local AS 100
   4 Octet AS Capability: Advertised Received
 ~~~
 
+BGP Speakers with IPv4 configuration:
 ~~~
 onos> bgp-speakers 
-speaker1: port=of:0000000000000100/4, vlan=None, peers=[10.100.103.2, 10.100.102.2, 10.100.101.2]
+speaker1: port=of:0000000000000100/4, vlan=None, peers=[10.100.101.2, 10.100.102.2, 10.100.103.2]
+~~~
+
+BGP Speakers with IPv6 configuration:
+~~~
+onos> bgp-speakers 
+speaker1: port=of:0000000000000100/4, vlan=None, peers=[2001:db8:100:101::2, 2001:db8:100:102::2, 2001:db8:100:103::2]
 ~~~
 
 In addition, ONOS GUI is avaible from your host through [http://10.250.0.2:8181/onos/ui/login.html](http://10.250.0.2:8181/onos/ui/login.html). To login karaf:karaf.
@@ -146,7 +163,7 @@ In addition, ONOS GUI is avaible from your host through [http://10.250.0.2:8181/
 ![ONOS-GUI](https://raw.githubusercontent.com/ralvarep/ONOS-SDN-IP/master/scenario_1/img/ONOS-GUI.jpg)
 
 
-**STEP 5: Connectivity Test between clients**
+**STEP 6: Connectivity Test between clients**
 
 Now you can test the connectivity between the clients. For example, entering in the client-101 console:
 ~~~
@@ -159,6 +176,18 @@ root@client-101:~# ping 10.103.0.2
 PING 10.103.0.2 (10.103.0.2) 56(84) bytes of data.
 64 bytes from 10.103.0.2: icmp_seq=1 ttl=62 time=0.392 ms
 64 bytes from 10.103.0.2: icmp_seq=2 ttl=62 time=0.249 ms
+~~~
+
+~~~
+root@client-101:~# ping6 2001:db8:102::2
+PING 2001:db8:102::2(2001:db8:102::2) 56 data bytes
+64 bytes from 2001:db8:102::2: icmp_seq=1 ttl=62 time=4.02 ms
+64 bytes from 2001:db8:102::2: icmp_seq=2 ttl=62 time=0.134 ms
+
+root@client-101:~# ping6 2001:db8:103::2
+PING 2001:db8:103::2(2001:db8:103::2) 56 data bytes
+64 bytes from 2001:db8:103::2: icmp_seq=1 ttl=62 time=2.23 ms
+64 bytes from 2001:db8:103::2: icmp_seq=2 ttl=62 time=0.116 ms
 ~~~
 
 **OTHER OPTIONS:**
@@ -181,11 +210,6 @@ $ sudo vnx -f ONOS-SDN-IP.xml -P
 ~~~
 
 
-## Notes
-
-* IPv6 is not totally support in SDN-IP application. In this scenario ONOS is learning IPv6 routes through a established IPv4 BGP session between the external routers and Quagga node, but it is not creating flows rules to manage the data traffic.
-
-
 ## Author
 
 This project has been developed by [Raúl Álvarez Pinilla](https://es.linkedin.com/in/raulalvarezpinilla).
@@ -193,6 +217,8 @@ This project has been developed by [Raúl Álvarez Pinilla](https://es.linkedin.
 
 ## References
 
+ *  [ONOS Project](http://onosproject.org/)
  *  [CORD Project](http://opencord.org/)
  *  [SDN-IP (Wiki)](https://wiki.onosproject.org/display/ONOS/SDN-IP)
+ *  [SDN-IP (IPv6)](https://wiki.onosproject.org/display/ONOS/IPv6#IPv6-IPv6RoutesforSDN-IPUseCase)
  *  [Quagga](http://www.nongnu.org/quagga/)
