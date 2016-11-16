@@ -35,5 +35,8 @@ This project has been developed by [Raúl Álvarez Pinilla](https://es.linkedin.
 
 ## References
 
+ *  [ONOS Project](http://onosproject.org/)
  *  [CORD Project](http://opencord.org/)
  *  [SDN-IP (Wiki)](https://wiki.onosproject.org/display/ONOS/SDN-IP)
+ *  [SDN-IP (IPv6)](https://wiki.onosproject.org/display/ONOS/IPv6#IPv6-IPv6RoutesforSDN-IPUseCase)
+ *  [Quagga](http://www.nongnu.org/quagga/)
