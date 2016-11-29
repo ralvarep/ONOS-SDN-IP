@@ -2,6 +2,7 @@
 
 pkill -f zebra
 pkill -f bgpd
+rm -f /var/log/quagga/*.log
 
 sleep 5
 
