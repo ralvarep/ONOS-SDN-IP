@@ -9,5 +9,5 @@ sleep 3
 ./bin/start
 
 echo "Waiting for ONOS startup..."
-sleep 80
+sleep 100
 bin/client "cfg set org.onosproject.provider.host.impl.HostLocationProvider ipv6NeighborDiscovery true"
